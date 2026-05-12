@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study: Behavioral Pattern Analysis in Online Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Source+Sans+3:wght@300;400;600&family=Source+Code+Pro:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1a2e;
+    --ink-light: #4a4a6a;
+    --ink-faint: #8888aa;
+    --accent: #c0392b;
+    --accent-warm: #e67e22;
+    --paper: #faf9f6;
+    --paper-warm: #f5f0e8;
+    --rule: #ddd8cc;
+    --highlight: #fff3cd;
+    --green: #27ae60;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--ink);
+    color: white;
+    padding: 72px 0 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.015) 40px,
+      rgba(255,255,255,0.015) 80px
+    );
+  }
+  .header-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+  }
+  .case-label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: block;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 4vw, 42px);
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    color: white;
+  }
+  .header-summary {
+    font-size: 17px;
+    color: rgba(255,255,255,0.72);
+    max-width: 620px;
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  .meta-row {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .meta-label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .meta-value {
+    font-size: 14px;
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+  }
+
+  /* ── LAYOUT ── */
+  main {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 64px 40px 100px;
+  }
+
+  /* ── SECTION STRUCTURE ── */
+  section {
+    margin-bottom: 64px;
+  }
+  .section-label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    display: block;
+  }
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 20px;
+    padding-bottom: 14px;
+    border-bottom: 1.5px solid var(--rule);
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 28px 0 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  p {
+    color: var(--ink-light);
+    margin-bottom: 16px;
+  }
+  p:last-child { margin-bottom: 0; }
+
+  /* ── CALLOUT BOX ── */
+  .callout {
+    background: var(--paper-warm);
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    margin: 28px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .callout p {
+    font-size: 15px;
+    color: var(--ink);
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* ── STAT GRID ── */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin: 28px 0;
+  }
+  .stat-card {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    padding: 20px;
+  }
+  .stat-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+  .stat-desc {
+    font-size: 13px;
+    color: var(--ink-faint);
+    line-height: 1.4;
+  }
+
+  /* ── METHOD STAGES ── */
+  .stage {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .stage-badge {
+    display: inline-block;
+    background: var(--ink);
+    color: white;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+  }
+  .stage h3 {
+    margin-top: 0;
+    font-size: 17px;
+    font-weight: 600;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .metric-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .metric-box {
+    background: var(--paper-warm);
+    border-radius: 6px;
+    padding: 16px;
+  }
+  .metric-name {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .metric-desc {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.5;
+  }
+
+  /* ── CONNECTOR ── */
+  .stage-connector {
+    text-align: center;
+    padding: 4px 0;
+    color: var(--ink-faint);
+    font-size: 20px;
+  }
+
+  /* ── OUTPUT CARDS ── */
+  .output-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .output-card {
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 24px;
+    background: white;
+  }
+  .output-card .output-audience {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 8px;
+  }
+  .output-card h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+  .output-card p {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+  .bar-label {
+    font-size: 12px;
+    color: var(--ink-faint);
+    margin-bottom: 4px;
+  }
+  .bar-track {
+    background: var(--paper-warm);
+    border-radius: 3px;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 14px;
+  }
+  .bar-fill-high {
+    background: var(--accent);
+    height: 100%;
+    border-radius: 3px;
+    width: 90%;
+  }
+  .bar-fill-low {
+    background: var(--green);
+    height: 100%;
+    border-radius: 3px;
+    width: 20%;
+  }
+
+  /* ── IMPACT ── */
+  .impact-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .impact-item {
+    padding: 20px;
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+  }
+  .impact-item .impact-icon {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+  .impact-item h4 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+  .impact-item p {
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  /* ── REFLECTION ── */
+  .reflection {
+    background: var(--ink);
+    color: white;
+    border-radius: 8px;
+    padding: 36px 40px;
+    margin-top: 28px;
+  }
+  .reflection h3 {
+    color: white;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 16px;
+    margin-top: 0;
+  }
+  .reflection p {
+    color: rgba(255,255,255,0.72);
+    font-size: 15px;
+    line-height: 1.75;
+  }
+
+  /* ── FIGURE ── */
+  .figure-block {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 24px;
+    margin: 24px 0;
+  }
+  .figure-caption {
+    font-size: 13px;
+    color: var(--ink-faint);
+    font-style: italic;
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+  .figure-placeholder {
+    background: var(--paper-warm);
+    border: 1.5px dashed var(--rule);
+    border-radius: 6px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 8px;
+    color: var(--ink-faint);
+    font-size: 13px;
+    text-align: center;
+  }
+  .figure-placeholder .fig-icon { font-size: 28px; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--rule);
+    padding: 32px 40px;
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .footer-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: var(--ink);
+  }
+  .footer-contact {
+    font-size: 13px;
+    color: var(--ink-faint);
+  }
+
+  @media (max-width: 600px) {
+    main { padding: 40px 24px 72px; }
+    header { padding: 48px 0 40px; }
+    .header-inner { padding: 0 24px; }
+    .metric-row, .output-grid, .impact-row { grid-template-columns: 1fr; }
+    footer { padding: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <span class="case-label">Portfolio Case Study</span>
+    <h1>Behavioral Pattern Analysis<br>in Online Assessment</h1>
+    <p class="header-summary">A mixed-methods research program to detect and deter academic dishonesty at scale — combining statistical modeling, permutation testing, and qualitative visual analysis to produce findings used in faculty interventions and institutional proceedings.</p>
+    <div class="meta-row">
+      <div class="meta-item">
+        <span class="meta-label">Role</span>
+        <span class="meta-value">Lead Researcher</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Organization</span>
+        <span class="meta-value">UT Austin LAITS</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Duration</span>
+        <span class="meta-value">2022 – 2025</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Methods</span>
+        <span class="meta-value">Quant + Qual, Mixed</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- CONTEXT -->
+  <section>
+    <span class="section-label">01 — Context & Challenge</span>
+    <h2>The Research Problem</h2>
+    <p>Online asynchronous courses at scale create a fundamental behavioral research problem: how do you distinguish normal variation in student exam behavior from coordinated action, across hundreds of assessments and thousands of students, while minimizing false positives that could harm innocent students?</p>
+    <p>Conventional monitoring tools flag surface-level similarities but cannot account for the statistical base rate of coincidental answer overlap. At the same time, the stakes of over-flagging are significant — accusing a student of academic dishonesty on insufficient evidence undermines the integrity of the process itself.</p>
+    <p>The challenge was to design a rigorous, defensible, and scalable research methodology: one that could produce findings reliable enough to inform both faculty intervention and formal institutional proceedings, while remaining calibrated to minimize false positives.</p>
+
+    <div class="callout">
+      <p>This work was fundamentally about keeping online classes valid. Because the courses were large and asynchronous, maintaining assessment integrity was essential to ensuring that all students had a genuine opportunity to learn — and that the online program itself remained credible.</p>
+    </div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-number">150+</div>
+        <div class="stat-desc">Assessments analyzed per semester across client courses</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">7–10</div>
+        <div class="stat-desc">Faculty client courses managed per semester</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">~50</div>
+        <div class="stat-desc">Students flagged for intervention in a single course at peak</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">10K</div>
+        <div class="stat-desc">Permutation iterations per test to establish behavioral baseline</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH DESIGN -->
+  <section>
+    <span class="section-label">02 — Research Design</span>
+    <h2>A Two-Stage Mixed-Methods Funnel</h2>
+    <p>The methodology was designed as a deliberate two-stage funnel. Each stage served a different research purpose: the first reduced a large population to high-priority cases; the second determined whether the flagged behavioral patterns were meaningful.</p>
+
+    <div class="stage">
+      <span class="stage-badge">Stage 1</span>
+      <h3>Quantitative Screening — Who to Examine</h3>
+      <p>The goal of Stage 1 was to reduce a population of thousands of student pairs to a manageable set warranting deeper qualitative investigation. Two complementary statistical metrics were applied to each assessment:</p>
+      <div class="metric-row">
+        <div class="metric-box">
+          <div class="metric-name">K-Index</div>
+          <div class="metric-desc">Measures the probability that two students would share as many identical <em>wrong</em> answers as observed, given their individual performance levels. Wrong answers are the key signal: students who know the material naturally converge on correct answers, but shared errors are harder to explain innocently.</div>
+        </div>
+        <div class="metric-box">
+          <div class="metric-name">Time-Coincidence Index</div>
+          <div class="metric-desc">Uses permutation testing (10,000 iterations per pair) to establish a baseline distribution of how often two independently working students would be expected to answer the same question within a given time window. Pairs whose observed co-timing fell outside this distribution were flagged.</div>
+        </div>
+      </div>
+      <p style="margin-top:16px; font-size:14px; color: var(--ink-faint); font-style: italic;">Both metrics were deliberately calibrated to be conservative — erring toward under-flagging rather than over-flagging, because the consequences of a false positive were serious for students and faculty alike.</p>
+    </div>
+
+    <div class="stage-connector">↓</div>
+
+    <div class="stage">
+      <span class="stage-badge">Stage 2</span>
+      <h3>Qualitative Visual Analysis — Whether the Pattern Made Sense</h3>
+      <p>Quantitative thresholds determined <em>who</em> to examine more closely. Qualitative analysis determined <em>whether the observed pattern was meaningful</em>. This involved visual inspection of each student pair's exam-navigation timeline — a graphical representation of which questions each student was viewing at each moment in time, compared side by side.</p>
+      <p>The key behavioral signals assessed in this stage included:</p>
+      <ul style="color: var(--ink-light); padding-left: 20px; margin: 12px 0; font-size:15px; line-height:2;">
+        <li>Simultaneous tab switching — two students moving to the same question at the same time despite randomized question ordering</li>
+        <li>Answer switching — one student changing their response to match the other student's answer after the other had submitted</li>
+        <li>Following behavior — one student's navigation pattern mirroring the other's across an entire assessment</li>
+        <li>Response timing clustering — bursts of coordinated activity concentrated in specific windows of the exam</li>
+      </ul>
+
+      <div class="figure-block">
+        <div class="figure-placeholder">
+          <span class="fig-icon">📊</span>
+          <span><strong>Figure 1:</strong> Example tab-switching timeline comparison</span>
+          <span style="font-size:12px;">[Insert anonymized chart — Student A vs. Student B, colored by question tab]</span>
+        </div>
+        <p class="figure-caption">Each color represents a different exam question. The x-axis shows time elapsed during the assessment; the y-axis shows which question tab each student was viewing. Vertical alignment between the two charts indicates the students were viewing the same question at the same time. Black boxes highlight windows of coordinated activity that warrant escalation.</p>
+      </div>
+
+      <p>This qualitative methodology evolved significantly over three years. The most important discovery was <strong>answer switching</strong> — a behavior in which one student would change their response to match the other's after the other had submitted. Answer switching was largely invisible to the quantitative metrics, which measured answer agreement at final submission rather than tracking changes over time. Identifying and standardizing this as an additional qualitative indicator substantially improved the accuracy of the overall process.</p>
+      <p>This heuristic framework was documented and trained into three graduate research assistants, four faculty clients, and presented in a methodology demonstration for university leadership.</p>
+    </div>
+  </section>
+
+  <!-- OUTPUTS -->
+  <section>
+    <span class="section-label">03 — From Findings to Action</span>
+    <h2>Two Outputs, Two Stakeholder Needs</h2>
+    <p>A key research communication insight that emerged over time: the same underlying findings needed to be packaged differently depending on what action they were meant to support. Two distinct output types served two distinct stakeholder groups with different evidentiary needs.</p>
+
+    <div class="output-grid">
+      <div class="output-card">
+        <div class="output-audience">Stakeholder — Faculty Clients</div>
+        <h4>Weekly Dissuasion Reports</h4>
+        <p>Lower evidentiary bar. Designed to prompt behavioral intervention — flagging students for monitoring or academic warning — rather than formal punishment. Reports summarized quantitative thresholds crossed and noted the number of students meeting criteria each week.</p>
+      </div>
+      <div class="output-card">
+        <div class="output-audience">Stakeholder — Student Judicial Services</div>
+        <h4>Formal Evidential Memos</h4>
+        <p>Higher evidentiary bar. Required the statistical case to be airtight and the visual evidence to be legible to a non-specialist audience. Memos combined quantitative p-values, methodology explanation, and annotated visual exhibits into a single defensible document.</p>
+      </div>
+    </div>
+
+    <p style="margin-top:24px;">This distinction was not merely presentational — it reflected a deliberate research design choice about what level of confidence was required for each type of action, and what format would allow non-researcher stakeholders to evaluate and act on the findings appropriately.</p>
+  </section>
+
+  <!-- IMPACT -->
+  <section>
+    <span class="section-label">04 — Impact</span>
+    <h2>Behavioral Change at Scale</h2>
+    <p>The primary impact metric for this program was not the number of students escalated to formal proceedings — that data was appropriately confidential — but rather the trajectory of the dissuasion list over each semester.</p>
+
+    <div class="figure-block">
+      <p style="font-size:14px; font-weight:600; color: var(--ink); margin-bottom:16px;">Illustrative: Dissuasion List Trajectory Within a Semester</p>
+      <div style="padding: 0 8px;">
+        <div class="bar-label">Week 3 — Initial flagged population (up to 10% of class / ~50 students)</div>
+        <div class="bar-track"><div class="bar-fill-high"></div></div>
+        <div class="bar-label">Week 8 — Mid-semester, following intervention contact</div>
+        <div class="bar-track"><div style="background: var(--accent-warm); height:100%; border-radius:3px; width:55%;"></div></div>
+        <div class="bar-label">Week 14 — End of semester (best case: near-zero escalations)</div>
+        <div class="bar-track"><div class="bar-fill-low"></div></div>
+      </div>
+      <p class="figure-caption">A consistently shrinking dissuasion list across a semester was the primary evidence of program efficacy: it indicated both that the intervention was working, and that the initial targeting was accurate enough to produce behavioral change in the flagged population.</p>
+    </div>
+
+    <div class="impact-row">
+      <div class="impact-item">
+        <div class="impact-icon">📉</div>
+        <h4>Behavioral Change</h4>
+        <p>Dissuasion lists consistently shrank over the course of each semester, indicating that faculty intervention informed by research findings was producing measurable changes in student behavior.</p>
+      </div>
+      <div class="impact-item">
+        <div class="impact-icon">🎯</div>
+        <h4>Targeting Accuracy</h4>
+        <p>The dwindling list provided indirect validation of targeting accuracy: students who changed their behavior when monitored were likely those whose prior behavior had been flagged correctly.</p>
+      </div>
+      <div class="impact-item">
+        <div class="impact-icon">📋</div>
+        <h4>Policy & Documentation</h4>
+        <p>Authored 4 best-practices documents adopted by client faculty and project managers. Presented methodology to university leadership. Findings directly informed tool adoption and course policy decisions.</p>
+      </div>
+      <div class="impact-item">
+        <div class="impact-icon">👥</div>
+        <h4>Knowledge Transfer</h4>
+        <p>Developed and trained the qualitative heuristic framework across 3 graduate research assistants and 4 faculty clients, extending the program's reach beyond the original research team.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- REFLECTION -->
+  <section>
+    <span class="section-label">05 — Reflection</span>
+    <h2>What This Work Taught Me</h2>
+
+    <div class="reflection">
+      <h3>On the boundary between statistical evidence and human judgment</h3>
+      <p>The most intellectually interesting challenge in this work was navigating the hand-off point between quantitative and qualitative analysis. The statistical metrics were designed to be conservative — to minimize false positives — but they were also necessarily incomplete. Numbers can tell you that something unusual happened; they cannot always tell you what it means.</p>
+      <p style="margin-top:14px;">The qualitative stage existed precisely to answer the question the numbers couldn't: does this pattern make sense as human behavior? Learning to read behavioral timelines — to develop and then articulate a "trained eye" — required building a mental model of how students normally move through an exam, so that deviation from that pattern became legible. That is not a statistical skill. It is a research skill: the ability to hold a model of normal behavior in mind and recognize when observed behavior departs from it in a meaningful way.</p>
+      <p style="margin-top:14px;">The discovery of answer switching as a distinct behavioral signal was a product of that qualitative rigor. It emerged from close observation of patterns the numbers flagged but couldn't explain — and it substantially changed how the program operated. That experience reinforced something I carry into all research work: quantitative analysis tells you where to look; qualitative analysis tells you what you're seeing.</p>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="footer-name">Scott Spicer</div>
+  <div class="footer-contact">spicersr1@gmail.com &nbsp;·&nbsp; Chicago, IL &nbsp;·&nbsp; linkedin.com/in/scott-spicer-553259b1</div>
+</footer>
+
+</body>
+</html>
