@@ -291,49 +291,7 @@
     align-items: center;
     justify-content: center;
   }
-  .featured-visual-placeholder {
-    text-align: center;
-    color: var(--ink-faint);
-    padding: 24px;
-  }
-  .placeholder-icon {
-    font-family: 'Fraunces', serif;
-    font-size: 56px;
-    font-style: italic;
-    color: var(--rust);
-    margin-bottom: 12px;
-    line-height: 1;
-  }
-  .placeholder-text {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-  }
 
-  /* simulate visual: chart bars made of CSS */
-  .visual-chart {
-    width: 80%;
-    height: 75%;
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    gap: 6px;
-    align-items: end;
-    padding: 20px;
-  }
-  .bar {
-    background: var(--rust);
-    opacity: 0.85;
-    border-radius: 1px 1px 0 0;
-  }
-  .bar:nth-child(1) { height: 45%; opacity: 0.4; }
-  .bar:nth-child(2) { height: 62%; opacity: 0.5; }
-  .bar:nth-child(3) { height: 88%; background: var(--ink); opacity: 1; }
-  .bar:nth-child(4) { height: 92%; background: var(--ink); opacity: 1; }
-  .bar:nth-child(5) { height: 71%; opacity: 0.6; }
-  .bar:nth-child(6) { height: 38%; opacity: 0.4; }
-  .bar:nth-child(7) { height: 25%; opacity: 0.35; }
-  .bar:nth-child(8) { height: 18%; opacity: 0.3; }
 
   .featured-content .tag {
     font-family: 'JetBrains Mono', monospace;
@@ -376,8 +334,113 @@
   }
   .featured-card:hover .arrow { transform: translateX(6px); }
 
+  /* ── SECONDARY WORK CARDS ── */
+  .secondary-work {
+    margin-top: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .secondary-card {
+    background: var(--paper);
+    border: 1px solid var(--rule);
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  .secondary-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--rule);
+    transition: background 0.3s ease;
+  }
+  .secondary-card:hover {
+    border-color: rgba(181, 79, 42, 0.35);
+    box-shadow: 0 8px 32px -16px rgba(26, 31, 46, 0.12);
+  }
+  .secondary-card:hover::before {
+    background: var(--rust);
+  }
+  .secondary-card .sc-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  .secondary-card h3 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .secondary-card h3 .italic { font-style: italic; color: var(--rust-deep); }
+  .secondary-card p {
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--ink-soft);
+    flex: 1;
+  }
+  .secondary-card p strong {
+    color: var(--ink);
+    font-weight: 600;
+  }
+  .secondary-card .sc-contribution {
+    background: var(--paper-deep);
+    border-left: 2px solid var(--rust);
+    padding: 12px 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+  .secondary-card .sc-contribution strong {
+    font-weight: 600;
+    color: var(--ink);
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    color: var(--rust);
+  }
+  .secondary-card .sc-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .sc-chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--ink-faint);
+    background: var(--paper-deep);
+    border: 1px solid var(--rule);
+    padding: 5px 10px;
+    border-radius: 2px;
+  }
+  .sc-avail {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding-top: 8px;
+    border-top: 1px solid var(--rule);
+  }
+
   /* ── OPEN RESEARCH ── */
-  /* Flagship dissertation card */
   .dissertation-card {
     display: block;
     background: var(--ink);
@@ -466,7 +529,6 @@
   }
   .dissertation-card:hover .research-link .arrow { transform: translateX(6px); }
 
-  /* Chapter intro divider */
   .chapter-intro {
     display: grid;
     grid-template-columns: 280px 1fr;
@@ -495,7 +557,6 @@
     max-width: 640px;
   }
 
-  /* Chapter research cards (existing) */
   .research-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -880,6 +941,7 @@
     .hero-meta { border-left: none; border-top: 1px solid var(--rule); padding-left: 0; padding-top: 32px; }
     .section-header, .toolkit-header { grid-template-columns: 1fr; gap: 24px; }
     .featured-card { grid-template-columns: 1fr; padding: 32px; gap: 32px; }
+    .secondary-work { grid-template-columns: 1fr; }
     .research-grid { grid-template-columns: 1fr; }
     .research-card { padding: 28px; }
     .dissertation-card { padding: 32px; }
@@ -948,17 +1010,7 @@
 
   <a href="case-study.html" class="featured-card">
     <div class="featured-visual">
-      <!-- Replace this CSS chart placeholder with a real screenshot or graphic from the case study -->
-      <div class="visual-chart">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
-      </div>
+      <img src="case-study-screenshot.png" alt="Behavioral pattern analysis — tab-switching timeline visualization" style="width: 100%; height: 100%; object-fit: cover;">
     </div>
     <div class="featured-content">
       <span class="tag">Case Study · Mixed Methods · 2022–2025</span>
@@ -967,6 +1019,26 @@
       <span class="read-more">Read the full case study <span class="arrow">→</span></span>
     </div>
   </a>
+
+  <!-- ── SECONDARY WORK CARDS ── -->
+  <div class="secondary-work">
+    <div class="secondary-card">
+      <span class="sc-tag">Policy Brief · AI &amp; Academic Integrity · 2023</span>
+      <h3>Detecting and Addressing <span class="italic">AI Plagiarism</span> in Online Courses</h3>
+      <p>A practical guide for faculty on GenAI tools in the classroom — synthesizing the emerging landscape of AI writing tools, their academic integrity implications, and concrete strategies for course design, assessment, and detection. Adopted by faculty clients and project managers at UT Austin LAITS.</p>
+      <div class="sc-contribution">
+        <strong>Original contribution</strong>
+        A response-bank detection framework: collecting sample outputs from common AI tools (ChatGPT, Bing AI, Gemini) per assessment prompt and using them as a direct comparison baseline against suspicious student submissions — the same approach used to compare student papers for collusion.
+      </div>
+      <div class="sc-chips">
+        <span class="sc-chip">Policy synthesis</span>
+        <span class="sc-chip">Instructional design</span>
+        <span class="sc-chip">Detection methodology</span>
+        <span class="sc-chip">Faculty communication</span>
+      </div>
+      <span class="sc-avail">Document available on request</span>
+    </div>
+  </div>
 </section>
 
 <!-- ── OPEN RESEARCH ── -->
@@ -979,7 +1051,6 @@
     <h2>Doctoral research, <span class="italic">openly available</span>.</h2>
   </div>
 
-  <!-- Flagship: Dissertation -->
   <a href="SPICER-PRIMARY-2024.pdf" class="dissertation-card">
     <div class="dissertation-meta">
       <span class="research-tag">Dissertation · 253 pp.</span>
@@ -997,7 +1068,6 @@
     <span class="research-link">Read the full dissertation <span class="arrow">→</span></span>
   </a>
 
-  <!-- Chapter projects -->
   <div class="chapter-intro">
     <span class="chapter-label">Substantive Chapters · Standalone Studies</span>
     <p>Each of the dissertation's three substantive chapters represents an independent study with its own methodology and dataset. Two are available as standalone projects on OSF; the third is documented in full within the dissertation.</p>
