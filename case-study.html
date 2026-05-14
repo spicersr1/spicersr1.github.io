@@ -281,29 +281,35 @@
     font-size: 14px;
     line-height: 1.6;
   }
-  .bar-label {
-    font-size: 12px;
-    color: var(--ink-faint);
-    margin-bottom: 4px;
+  /* ── MILESTONE ROW (under trajectory chart) ── */
+  .milestone-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin-top: 8px;
+    padding-top: 22px;
+    border-top: 1px solid var(--rule);
   }
-  .bar-track {
-    background: var(--paper-warm);
-    border-radius: 3px;
-    height: 8px;
-    overflow: hidden;
-    margin-bottom: 14px;
+  .milestone-item .milestone-marker {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 6px;
   }
-  .bar-fill-high {
-    background: var(--accent);
-    height: 100%;
-    border-radius: 3px;
-    width: 90%;
+  .milestone-item h5 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
   }
-  .bar-fill-low {
-    background: var(--green);
-    height: 100%;
-    border-radius: 3px;
-    width: 20%;
+  .milestone-item p {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.55;
+    margin: 0;
   }
 
   /* ── IMPACT ── */
@@ -376,6 +382,189 @@
     margin-top: 12px;
     line-height: 1.5;
   }
+  /* ── FIGURE KEY ── */
+  .figure-key {
+    background: var(--paper-warm);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin-top: 4px;
+  }
+  .key-title {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .key-row {
+    display: grid;
+    grid-template-columns: 110px 1fr;
+    gap: 14px;
+    padding: 8px 0;
+    border-top: 1px solid var(--rule);
+    align-items: baseline;
+  }
+  .key-row:first-of-type { border-top: none; padding-top: 4px; }
+  .key-marker {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+  }
+  .key-text {
+    font-size: 13px;
+    color: var(--ink-light);
+    line-height: 1.55;
+  }
+  .key-text strong { color: var(--ink); }
+
+  /* ── FEATURED IMPACT BLOCK ── */
+  .featured-impact {
+    background: white;
+    border: 1px solid var(--rule);
+    border-left: 4px solid var(--accent-warm);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 24px;
+  }
+  .featured-impact .featured-tag {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-warm);
+    margin-bottom: 10px;
+    display: block;
+    font-weight: 600;
+  }
+  .featured-impact h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 12px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+  .featured-impact p {
+    font-size: 15px;
+    color: var(--ink-light);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .featured-impact p:last-child { margin-bottom: 0; }
+
+  /* ── TAKEAWAYS ── */
+  .takeaway {
+    background: white;
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+  .takeaway-number {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 3px;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .takeaway h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0 0 12px;
+    text-transform: none;
+    letter-spacing: 0;
+    line-height: 1.35;
+  }
+  .takeaway p {
+    font-size: 15px;
+    color: var(--ink-light);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+  .takeaway p:last-child { margin-bottom: 0; }
+
+  /* ── DELIVERABLE FLOW LINK ── */
+  .deliverable-flow {
+    background: var(--paper-warm);
+    border-radius: 6px;
+    padding: 18px 22px;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.65;
+  }
+  .deliverable-flow strong { color: var(--ink); }
+
+  /* ── PROBLEM SPEC LIST ── */
+  .problem-spec {
+    list-style: none;
+    padding: 0;
+    margin: 24px 0 0;
+  }
+  .problem-spec > li {
+    padding: 16px 0 16px 22px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+    font-size: 15px;
+    color: var(--ink-light);
+    line-height: 1.65;
+  }
+  .problem-spec > li:first-child { padding-top: 4px; }
+  .problem-spec > li:last-child { border-bottom: none; padding-bottom: 0; }
+  .problem-spec > li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 24px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  .problem-spec > li:first-child::before { top: 12px; }
+  .problem-spec > li > strong {
+    color: var(--ink);
+    font-family: 'Source Code Pro', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  /* ── METRIC: PLAIN QUESTION + DETAIL ── */
+  .metric-question {
+    font-size: 15px;
+    color: var(--ink);
+    line-height: 1.55;
+    margin-top: 8px;
+    font-weight: 500;
+  }
+  .metric-detail {
+    font-size: 12px;
+    color: var(--ink-faint);
+    line-height: 1.5;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--rule);
+  }
 
   /* ── FOOTER ── */
   footer {
@@ -403,7 +592,9 @@
     main { padding: 40px 24px 72px; }
     header { padding: 48px 0 40px; }
     .header-inner { padding: 0 24px; }
-    .metric-row, .output-grid, .impact-row { grid-template-columns: 1fr; }
+    .metric-row, .output-grid, .impact-row, .milestone-row { grid-template-columns: 1fr; }
+    .key-row { grid-template-columns: 1fr; gap: 4px; }
+    .featured-impact, .takeaway { padding: 22px 24px; }
     footer { padding: 24px; }
   }
 </style>
@@ -442,13 +633,23 @@
   <section>
     <span class="section-label">01 — Context & Challenge</span>
     <h2>The Research Problem</h2>
-    <p>Online asynchronous courses at scale create a fundamental behavioral research problem: how do you distinguish normal variation in student exam behavior from coordinated action, across hundreds of assessments and thousands of students, while minimizing false positives that could harm innocent students?</p>
-    <p>Conventional monitoring tools flag surface-level similarities but cannot account for the statistical base rate of coincidental answer overlap. At the same time, the stakes of over-flagging are significant — accusing a student of academic dishonesty on insufficient evidence undermines the integrity of the process itself.</p>
-    <p>The challenge was to design a rigorous, defensible, and scalable research methodology: one that could produce findings reliable enough to inform both faculty intervention and formal institutional proceedings, while remaining calibrated to minimize false positives.</p>
+    <p>Online asynchronous courses at scale depend on the validity of their assessments. A program perceived as easy to cheat in cannot recruit serious students, and faculty cannot teach into it with confidence. Keeping the assessments — and the program — credible was therefore both a research problem and a business problem at once.</p>
+    <p>Within that frame, the program operated under a dual mandate: dissuade broadly enough to keep the courses healthy, and catch the holdouts with evidence strong enough to survive formal review. Everything below follows from holding both halves of that mandate at the same time.</p>
 
-    <div class="callout">
-      <p>This work was fundamentally about keeping online classes valid. Because the courses were large and asynchronous, maintaining assessment integrity was essential to ensuring that all students had a genuine opportunity to learn — and that the online program itself remained credible.</p>
-    </div>
+    <ul class="problem-spec">
+      <li>
+        <strong>Program objectives</strong>
+        Dissuade students from cheating at scale; catch — with defensible confidence — those who cheated anyway.
+      </li>
+      <li>
+        <strong>Research question</strong>
+        How do we distinguish coordinated cheating from coincidental overlap across hundreds of assessments and thousands of students, at signal levels usable for both broad behavioral intervention and formal institutional proceedings?
+      </li>
+      <li>
+        <strong>Desired outcomes</strong>
+        Dissuasion lists that shrink across each semester; a small set of escalations that hold up to formal review; an online program credible enough — internally and externally — to keep attracting students.
+      </li>
+    </ul>
 
     <div class="stat-grid">
       <div class="stat-card">
@@ -474,20 +675,23 @@
   <section>
     <span class="section-label">02 — Research Design</span>
     <h2>A Two-Stage Mixed-Methods Funnel</h2>
-    <p>The methodology was designed as a deliberate two-stage funnel. Each stage served a different research purpose: the first reduced a large population to high-priority cases; the second determined whether the flagged behavioral patterns were meaningful.</p>
+    <p>The dual goal — dissuade at scale, catch with confidence — required two different kinds of evidence at two different evidentiary bars. <strong>Quantitative methods alone</strong> could screen a large population efficiently but could not establish whether a flagged pattern was actually coordinated behavior or coincidental overlap. <strong>Qualitative methods alone</strong> could establish meaningful behavioral patterns case by case but could not be applied at the scale needed to surface candidates in the first place.</p>
+    <p>Mixed methods solved both problems by sequencing them. Stage one — quantitative — produced the broad list of students whose behavior was unusual enough to warrant intervention. Stage two — qualitative — produced the case-level confidence required to escalate a subset of those students to formal proceedings. Each stage served a different research purpose, and each stage produced a different deliverable for a different stakeholder.</p>
 
     <div class="stage">
       <span class="stage-badge">Stage 1</span>
       <h3>Quantitative Screening — Who to Examine</h3>
-      <p>The goal of Stage 1 was to reduce a population of thousands of student pairs to a manageable set warranting deeper qualitative investigation. Two complementary statistical metrics were applied to each assessment:</p>
+      <p>The goal of Stage 1 was to reduce a population of thousands of student pairs to a manageable set warranting deeper qualitative investigation. We deliberately chose the <strong>K-Index</strong> and the <strong>Time-Coincidence Index</strong> because they are the field-standard metrics in the assessment-integrity literature — the same family of statistics used by organizations like ETS to flag suspicious behavior on high-stakes standardized exams such as the SAT. Adopting established metrics meant our findings were legible and defensible to outside stakeholders who already understood what those numbers meant.</p>
       <div class="metric-row">
         <div class="metric-box">
           <div class="metric-name">K-Index</div>
-          <div class="metric-desc">Measures the probability that two students would share as many identical <em>wrong</em> answers as observed, given their individual performance levels. Wrong answers are the key signal: students who know the material naturally converge on correct answers, but shared errors are harder to explain innocently.</div>
+          <div class="metric-question">How unlikely is it that two students got the same questions wrong, in the same way, by chance?</div>
+          <div class="metric-detail">Computes the probability that two students would share as many identical wrong answers as observed, given their individual performance levels. Wrong answers are the signal: students who know the material naturally converge on correct answers, but shared errors are harder to explain innocently.</div>
         </div>
         <div class="metric-box">
           <div class="metric-name">Time-Coincidence Index</div>
-          <div class="metric-desc">Uses permutation testing (10,000 iterations per pair) to establish a baseline distribution of how often two independently working students would be expected to answer the same question within a given time window. Pairs whose observed co-timing fell outside this distribution were flagged.</div>
+          <div class="metric-question">How unlikely is it that two students were on the same question at the same moment, over and over, by chance?</div>
+          <div class="metric-detail">Uses permutation testing (10,000 iterations per pair) to establish a baseline distribution of how often two independently working students would be expected to answer the same question within a given time window. Pairs whose observed co-timing fell outside this distribution were flagged.</div>
         </div>
       </div>
       <p style="margin-top:16px; font-size:14px; color: var(--ink-faint); font-style: italic;">Both metrics were deliberately calibrated to be conservative — erring toward under-flagging rather than over-flagging, because the consequences of a false positive were serious for students and faculty alike.</p>
@@ -510,10 +714,38 @@
       <div class="figure-block">
         <img
           src="case-study-screenshot.png"
-          alt="Figure 1: Example tab-switching timeline comparison — Student A vs. Student B, colored by question tab"
+          alt="Figure 1: Example tab-switching timeline comparison — Student 1 vs. Student 2, colored by question tab"
           style="width: 100%; height: auto; display: block; border-radius: 4px;"
         >
-        <p class="figure-caption">Each color represents a different exam question. The x-axis shows time elapsed during the assessment; the y-axis shows which question tab each student was viewing. Vertical alignment between the two charts indicates the students were viewing the same question at the same time. Black boxes highlight windows of coordinated activity that warrant escalation.</p>
+        <p class="figure-caption" style="margin-bottom: 16px;"><strong>Figure 1.</strong> Example tab-switching timeline comparison — Student 1 (top) vs. Student 2 (bottom). Black boxes mark windows of coordinated activity flagged for escalation.</p>
+
+        <div class="figure-key">
+          <div class="key-title">Key</div>
+          <div class="key-row">
+            <span class="key-marker">Top chart</span>
+            <span class="key-text"><strong>Student 1.</strong> The full timeline of which exam question Student 1 had open at each moment.</span>
+          </div>
+          <div class="key-row">
+            <span class="key-marker">Bottom chart</span>
+            <span class="key-text"><strong>Student 2.</strong> The same timeline for Student 2, stacked directly beneath Student 1 for side-by-side comparison.</span>
+          </div>
+          <div class="key-row">
+            <span class="key-marker">Colors</span>
+            <span class="key-text"><strong>One color per question.</strong> Each distinct color represents a different exam question. The same color appearing at the same x-position in both charts means both students were viewing the same question at the same time.</span>
+          </div>
+          <div class="key-row">
+            <span class="key-marker">X-axis</span>
+            <span class="key-text"><strong>Time elapsed</strong> during the assessment, from exam start (left) to submission (right).</span>
+          </div>
+          <div class="key-row">
+            <span class="key-marker">Y-axis</span>
+            <span class="key-text"><strong>Question tab</strong> the student was viewing at that moment.</span>
+          </div>
+          <div class="key-row">
+            <span class="key-marker">Black boxes</span>
+            <span class="key-text"><strong>Coordination windows.</strong> Sustained vertical alignment — both students moving to the same questions at the same times — flagged for escalation.</span>
+          </div>
+        </div>
       </div>
 
       <p>This qualitative methodology evolved significantly over three years. The most important discovery was <strong>answer switching</strong> — a behavior in which one student would change their response to match the other's after the other had submitted. Answer switching was largely invisible to the quantitative metrics, which measured answer agreement at final submission rather than tracking changes over time. Identifying and standardizing this as an additional qualitative indicator substantially improved the accuracy of the overall process.</p>
@@ -524,41 +756,138 @@
   <!-- OUTPUTS -->
   <section>
     <span class="section-label">03 — From Findings to Action</span>
-    <h2>Two Outputs, Two Stakeholder Needs</h2>
-    <p>A key research communication insight that emerged over time: the same underlying findings needed to be packaged differently depending on what action they were meant to support. Two distinct output types served two distinct stakeholder groups with different evidentiary needs.</p>
+    <h2>Two Deliverables, Two Stakeholders, One Pipeline</h2>
+    <p>Two deliverables sat at the operational core of the program, and together they encoded the dissuade-and-catch pipeline in artifact form. The first defined <strong>who to dissuade</strong>. The second defined <strong>who we caught</strong>, and only ever drew from students who had first appeared in the dissuasion stream. Both were required because they did different work, for different stakeholders, at different evidentiary bars.</p>
 
     <div class="output-grid">
       <div class="output-card">
-        <div class="output-audience">Stakeholder — Faculty Clients</div>
+        <div class="output-audience">For — Faculty Clients</div>
         <h4>Weekly Dissuasion Reports</h4>
-        <p>Lower evidentiary bar. Designed to prompt behavioral intervention — flagging students for monitoring or academic warning — rather than formal punishment. Reports summarized quantitative thresholds crossed and noted the number of students meeting criteria each week.</p>
+        <p><strong>What they did:</strong> defined who to dissuade. Each week's report named the students whose quantitative metrics had crossed our flagging thresholds, so faculty could send academic-warning communications, increase monitoring, or otherwise raise the cost of continued behavior.</p>
+        <p style="margin-top:10px;"><strong>Evidentiary bar:</strong> lower. The goal was behavioral intervention, not punishment — the reports needed to be accurate enough to warrant a faculty contact, not airtight enough to support a formal proceeding.</p>
       </div>
       <div class="output-card">
-        <div class="output-audience">Stakeholder — Student Judicial Services</div>
+        <div class="output-audience">For — Student Judicial Services</div>
         <h4>Formal Evidential Memos</h4>
-        <p>Higher evidentiary bar. Required the statistical case to be airtight and the visual evidence to be legible to a non-specialist audience. Memos combined quantitative p-values, methodology explanation, and annotated visual exhibits into a single defensible document.</p>
+        <p><strong>What they did:</strong> defined who we caught. Each memo built a complete case against a specific student or pair, combining quantitative p-values, qualitative behavioral analysis, methodology explanation, and annotated visual exhibits into a single defensible document.</p>
+        <p style="margin-top:10px;"><strong>Evidentiary bar:</strong> high. The statistical case had to be airtight and the visual evidence had to be legible to a non-specialist audience who would adjudicate the matter.</p>
       </div>
     </div>
 
-    <p style="margin-top:24px;">This distinction was not merely presentational — it reflected a deliberate research design choice about what level of confidence was required for each type of action, and what format would allow non-researcher stakeholders to evaluate and act on the findings appropriately.</p>
+    <div class="deliverable-flow">
+      <strong>The reports fed the memos.</strong> A student rarely made it into an evidential memo without first appearing on multiple dissuasion reports across the semester. That sequencing was deliberate: by the time a case reached Student Judicial Services, it had already survived several rounds of softer intervention and continued to meet the criteria nonetheless. That cumulative record — quantitative flags week after week, plus the qualitative behavioral pattern — was what made the formal cases defensible.
+    </div>
   </section>
 
   <!-- IMPACT -->
   <section>
     <span class="section-label">04 — Impact</span>
     <h2>Behavioral Change at Scale</h2>
+
+    <div class="featured-impact">
+      <span class="featured-tag">Headline Impact</span>
+      <h3>I defined the standards that let this program scale.</h3>
+      <p>Before I took control of the program, the analytical methods existed — but they were applied without consistent, articulated heuristics for who belonged in the dissuasion list versus who warranted escalation to a formal evidential memo. The boundary between the two was implicit and varied case by case.</p>
+      <p>I defined that boundary explicitly: the quantitative thresholds for flagging, the qualitative criteria for escalation, and the handoff logic that connected one category to the other. Once those standards were articulated, the methodology became something that could be applied uniformly across courses, semesters, and team members — and trained into other people. That is what allowed the program to grow during my tenure across 7–10 courses per semester, three graduate research assistants, and four faculty clients, while staying internally consistent.</p>
+    </div>
+
     <p>The primary impact metric for this program was not the number of students escalated to formal proceedings — that data was appropriately confidential — but rather the trajectory of the dissuasion list over each semester.</p>
 
     <div class="figure-block">
-      <p style="font-size:14px; font-weight:600; color: var(--ink); margin-bottom:16px;">Illustrative: Dissuasion List Trajectory Within a Semester</p>
-      <div style="padding: 0 8px;">
-        <div class="bar-label">Week 3 — Initial flagged population (up to 10% of class / ~50 students)</div>
-        <div class="bar-track"><div class="bar-fill-high"></div></div>
-        <div class="bar-label">Week 8 — Mid-semester, following intervention contact</div>
-        <div class="bar-track"><div style="background: var(--accent-warm); height:100%; border-radius:3px; width:55%;"></div></div>
-        <div class="bar-label">Week 14 — End of semester (best case: near-zero escalations)</div>
-        <div class="bar-track"><div class="bar-fill-low"></div></div>
+      <p style="font-size:14px; font-weight:600; color: var(--ink); margin-bottom:20px;">Figure 2 — Dissuasion List Trajectory Across a Semester (Illustrative)</p>
+
+      <svg viewBox="0 0 720 280" xmlns="http://www.w3.org/2000/svg"
+           style="width:100%;height:auto;display:block;"
+           role="img"
+           aria-label="Line chart of the dissuasion list shrinking from about 50 students at week 3 to near zero by week 14">
+
+        <!-- Top reference line (dashed) -->
+        <line x1="70" y1="50" x2="680" y2="50" stroke="#ddd8cc" stroke-width="1" stroke-dasharray="2,4"/>
+
+        <!-- X-axis baseline -->
+        <line x1="70" y1="200" x2="680" y2="200" stroke="#1a1a2e" stroke-width="1.2" opacity="0.4"/>
+
+        <!-- Y-axis tick labels -->
+        <text x="62" y="54" font-family="'Source Code Pro', monospace" font-size="10" fill="#8888aa" text-anchor="end" letter-spacing="0.5">~50</text>
+        <text x="62" y="204" font-family="'Source Code Pro', monospace" font-size="10" fill="#8888aa" text-anchor="end" letter-spacing="0.5">0</text>
+
+        <!-- Y-axis caption -->
+        <text x="22" y="125" font-family="'Source Code Pro', monospace" font-size="9" fill="#8888aa"
+              text-anchor="middle" transform="rotate(-90 22 125)" letter-spacing="1.5" font-weight="600">
+          STUDENTS FLAGGED
+        </text>
+
+        <!-- X-axis week ticks -->
+        <g font-family="'Source Code Pro', monospace" font-size="10" fill="#8888aa" text-anchor="middle" letter-spacing="0.5">
+          <text x="70" y="220">W1</text>
+          <text x="157" y="220">W3</text>
+          <text x="244" y="220">W5</text>
+          <text x="331" y="220">W7</text>
+          <text x="419" y="220">W9</text>
+          <text x="506" y="220">W11</text>
+          <text x="593" y="220">W13</text>
+          <text x="680" y="220">W15</text>
+        </g>
+
+        <!-- X-axis caption -->
+        <text x="375" y="248" font-family="'Source Code Pro', monospace" font-size="9" fill="#8888aa"
+              text-anchor="middle" letter-spacing="1.5" font-weight="600">
+          SEMESTER WEEKS
+        </text>
+
+        <!-- Area fill under trajectory (subtle warm) -->
+        <path d="M 157 50 L 375 125 L 636 185 L 636 200 L 157 200 Z"
+              fill="#c0392b" opacity="0.08"/>
+
+        <!-- Trajectory line -->
+        <polyline points="157,50 375,125 636,185"
+                  fill="none" stroke="#c0392b" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+
+        <!-- Data points (larger dot = more students on list) -->
+        <circle cx="157" cy="50" r="9" fill="white" stroke="#c0392b" stroke-width="3"/>
+        <circle cx="157" cy="50" r="3.5" fill="#c0392b"/>
+
+        <circle cx="375" cy="125" r="7" fill="white" stroke="#c0392b" stroke-width="2.5"/>
+        <circle cx="375" cy="125" r="2.5" fill="#c0392b"/>
+
+        <circle cx="636" cy="185" r="5" fill="white" stroke="#c0392b" stroke-width="2"/>
+        <circle cx="636" cy="185" r="1.5" fill="#c0392b"/>
+
+        <!-- Micro-labels above each dot -->
+        <g font-family="'Source Code Pro', monospace" text-anchor="middle">
+          <!-- Week 3 -->
+          <text x="157" y="22" font-size="14" font-weight="700" fill="#c0392b">~50</text>
+          <text x="157" y="36" font-size="9" font-weight="600" fill="#1a1a2e" letter-spacing="1">WEEK 3</text>
+
+          <!-- Week 8 -->
+          <text x="375" y="97" font-size="13" font-weight="700" fill="#c0392b">~25</text>
+          <text x="375" y="111" font-size="9" font-weight="600" fill="#1a1a2e" letter-spacing="1">WEEK 8</text>
+
+          <!-- Week 14 -->
+          <text x="636" y="157" font-size="13" font-weight="700" fill="#c0392b">~5</text>
+          <text x="636" y="171" font-size="9" font-weight="600" fill="#1a1a2e" letter-spacing="1">WEEK 14</text>
+        </g>
+      </svg>
+
+      <div class="milestone-row">
+        <div class="milestone-item">
+          <div class="milestone-marker">Week 3</div>
+          <h5>Initial flag</h5>
+          <p>Up to ~10% of the class lands on the dissuasion list after early-semester screening — roughly 50 students per course.</p>
+        </div>
+        <div class="milestone-item">
+          <div class="milestone-marker">Week 8</div>
+          <h5>Intervention takes effect</h5>
+          <p>Roughly half have dropped off the list after weeks of academic-warning contact and increased monitoring.</p>
+        </div>
+        <div class="milestone-item">
+          <div class="milestone-marker">Week 14</div>
+          <h5>End-of-term outcome</h5>
+          <p>Best case: a near-empty list. Those still on it are the candidates for formal escalation via evidential memos.</p>
+        </div>
       </div>
+
       <p class="figure-caption">A consistently shrinking dissuasion list across a semester was the primary evidence of program efficacy: it indicated both that the intervention was working, and that the initial targeting was accurate enough to produce behavioral change in the flagged population.</p>
     </div>
 
@@ -586,9 +915,30 @@
     </div>
   </section>
 
+  <!-- KEY TAKEAWAYS -->
+  <section>
+    <span class="section-label">05 — Key Takeaways</span>
+    <h2>What This Program Proved</h2>
+    <p>Two findings stand out as the program's primary takeaways — one about the system as built, one about what I added to it along the way.</p>
+
+    <div class="takeaway">
+      <span class="takeaway-number">Takeaway 1</span>
+      <h3>The system worked as designed: dissuade broadly, catch narrowly.</h3>
+      <p>The two-stage funnel did what it was meant to do. The quantitative stage drove dissuasion at scale — as flagged students were contacted and monitored, dissuasion lists consistently shrank over the course of each semester. That trajectory was direct evidence that the dissuasion half of the mandate was producing measurable behavioral change in the flagged population.</p>
+      <p>The qualitative stage then performed its complementary function: it weeded out students whose quantitative flags were not borne out by closer behavioral inspection, so that the cases escalated to formal proceedings were only those for which the evidence was strong on both axes. We dissuaded broadly and caught narrowly — by design, not by accident.</p>
+    </div>
+
+    <div class="takeaway">
+      <span class="takeaway-number">Takeaway 2</span>
+      <h3>Standardizing answer switching into the workflow raised our qualitative confidence.</h3>
+      <p>Over time, as the team ran the qualitative visual analysis across many assessments, we came to recognize <strong>answer switching</strong> — a student changing their final response to match another student's after that student had submitted — as a uniquely useful behavioral signal. It was largely invisible to the quantitative metrics, which captured agreement only at the moment of final submission rather than the path of changes that got students there.</p>
+      <p>My contribution was operational. I incorporated answer switching into the standard qualitative workflow — defining what it looked like on the navigation timeline, when it warranted escalation, and how to document it for an evidential memo. Once it was part of the standard work rather than a signal we sometimes happened to notice, the qualitative stage had a second reinforcing signal alongside tab-switching alignment, and we could speak about coordinated behavior with materially more confidence than we could before.</p>
+    </div>
+  </section>
+
   <!-- REFLECTION -->
   <section>
-    <span class="section-label">05 — Reflection</span>
+    <span class="section-label">06 — Reflection</span>
     <h2>What This Work Taught Me</h2>
 
     <div class="reflection">
